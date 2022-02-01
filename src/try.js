@@ -10,7 +10,7 @@ exports.handler = function(event, context, callback) {
   });
 
 const items = event.body.split(',');
-base('prematricula').create([{
+base('prematricula-guape').create([{
       "fields":{
           "Nome":items[0],
           "CPF":items[1],
