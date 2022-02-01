@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<script>
+    function check(out){
+      console.log("this is the out", out);
+      if(out=="0"){
+        alert("Este CPF já está cadastrado");
+        window.location='https://flyenglish-mg.netlify.app/index'
+      }else{window.location='https://flyenglish-mg.netlify.app/matricula'}
+    }
+    function Login(){
+      document.getElementById('wait').innerHTML="Aguarde...";
+      var cpf_ = document.getElementById('cpf_').value;
+      var data = String(cpf_);
+      console.log('lenght', data.length, data, typeof(data));
+      if(data.length!=11){alert("CPF inválido");
+        window.location='https://flyenglish-mg.netlify.app/index'}
+      else{fetch('https://flyenglish-mg.netlify.app/.netlify/functions/login',{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       },
+      method: 'POST',
+      body: [data],
+    })
+  .then(response => response.text()).then((data)=>{this.check(data)})}}
+</script>
+<body>
+  <form class="login">
+    <span id="text-center">Bem vindo!</span>
+      <!---<label for="cpf_">CPF:</label><br> -->
+      <input type='number' id='cpf_' placeholder="CPF (do aluno ou responsável)" required>
+<button type="button" id="login_" onclick= "Login()"> Pré-matrícula</button>
+<spam id="wait"></spam>
+</body></form>
+<img id="logo" src="imgs/Fly+Slogan-01.png" width="200px" height="200px">
+</html>
